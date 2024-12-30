@@ -260,9 +260,21 @@ const cardEffects: CardEffectOptions[] = [
             { r: 255, g: 33, b: 33 },
             { r: 255, g: 120, b: 120 },
         ],
-        icon: '<i class="fa-solid fa-gamepad"></i>',
+        icon: '<i class="fa-solid fa-bug"></i>',
         mainTextColorHover: "hover:text-red-500",
         mainBorderColorHover: "hover:border-red-500",
+    },
+    {
+        ...CardEffect.DEFAULT_OPTIONS,
+        minPointFadeSpeed: 1,
+        maxPointFadeSpeed: 2,
+        colors: [
+            { r: 0, g: 255, b: 0 },
+            { r: 120, g: 255, b: 120 },
+        ],
+        icon: '<i class="fa-solid fa-gamepad"></i>',
+        mainTextColorHover: "hover:text-green-500",
+        mainBorderColorHover: "hover:border-green-500",
     },
 ];
 
@@ -274,7 +286,7 @@ if (wrapper) {
         cardDiv.className = "card";
 
         // Add card content
-        const html = `<div class="w-64 h-72 border border-gray-500 relative card text-gray-500 ${cardEffect.mainTextColorHover!} ${cardEffect.mainBorderColorHover!} transition duration-500">
+        const html = `<div class="w-64 h-72 border border-gray-500 relative card text-gray-500 bg-gradient-to-tr from-black to-zinc-950 ${cardEffect.mainTextColorHover!} ${cardEffect.mainBorderColorHover!} transition duration-500">
         <canvas class="w-full h-full relative z-1"></canvas>
         <div class="absolute w-52 h-52 flex justify-center items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-3 pointer-events-none radial-gradient opacity-0"></div>
         <div class="absolute w-52 h-52 flex justify-center items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-5xl z-4 pointer-events-none">${
@@ -294,83 +306,3 @@ if (wrapper) {
     });
 }
 
-// const canvas = document.querySelector("canvas");
-// if (canvas) {
-//     const ctx = canvas.getContext("2d")!;
-//     const cellSize = 10; // Size of each grid cell (square size)
-//     const gapSize = 20; // Gap between cells
-//     const gridCells = 42; // Number of cells in both directions (rows and columns)
-//     const squareSize = 15; // Size of the square
-
-//     // Calculate the canvas size based on grid and gap
-//     canvas.width = gridCells * (cellSize + gapSize) - gapSize;
-//     canvas.height = gridCells * (cellSize + gapSize) - gapSize;
-
-//     const squares: { x: number; y: number }[] = [];
-
-//     // Store all squares' positions for easy reference
-//     for (let row = 0; row < gridCells; row++) {
-//         for (let col = 0; col < gridCells; col++) {
-//             const x = col * (cellSize + gapSize);
-//             const y = row * (cellSize + gapSize);
-//             const squareX = x + (cellSize - squareSize) / 2;
-//             const squareY = y + (cellSize - squareSize) / 2;
-//             squares.push({ x: squareX, y: squareY });
-//         }
-//     }
-
-//     // Draw the grid initially
-//     drawGrid();
-
-//     function drawGrid() {
-//         ctx.clearRect(0, 0, canvas!.width, canvas!.height); // Clear the canvas before drawing again
-//         for (let i = 0; i < squares.length; i++) {
-//             const { x, y } = squares[i];
-//             drawSquare(x, y, squareSize);
-//         }
-//     }
-
-//     function drawSquare(
-//         x: number,
-//         y: number,
-//         size: number,
-//         opacity: number = 1
-//     ) {
-//         ctx.fillStyle = `rgba(0, 200, 0, ${opacity})`; // Use RGBA to control opacity
-//         ctx.fillRect(x, y, size, size); // Draw the square
-//     }
-
-//     function calculateOpacity(
-//         mouseX: number,
-//         mouseY: number,
-//         squareX: number,
-//         squareY: number
-//     ) {
-//         const distance = Math.sqrt(
-//             (mouseX - squareX) ** 2 + (mouseY - squareY) ** 2
-//         );
-//         const maxDistance = 150; // Max distance for fading effect
-//         const opacity = Math.max(0, 1 - distance / maxDistance); // Fade out the square based on distance
-//         return opacity;
-//     }
-
-//     canvas.addEventListener("mousemove", (event) => {
-//         const mouseX = event.offsetX;
-//         const mouseY = event.offsetY;
-
-//         // Re-draw the grid with fading squares
-//         drawGrid();
-
-//         // Adjust the opacity of squares based on mouse position
-//         for (let i = 0; i < squares.length; i++) {
-//             const { x, y } = squares[i];
-//             const opacity = calculateOpacity(
-//                 mouseX,
-//                 mouseY,
-//                 x + squareSize / 2,
-//                 y + squareSize / 2
-//             );
-//             drawSquare(x, y, squareSize, opacity);
-//         }
-//     });
-// }
